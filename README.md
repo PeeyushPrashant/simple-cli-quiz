@@ -1,4 +1,4 @@
-simple cli quiz
+#simple cli quiz
 A simple cli quiz around How well do you know me?
 
 This cli application,
