@@ -23,12 +23,33 @@ var questionList= [{
   answer: "yes"
 }]
 
+var highScore=[{
+  name:"Prashant",
+  scoreH:"5"
+}, {
+  name:"Vishal",
+  scoreH:"4"
+}, {
+  name:"Ravi",
+  scoreH:"3"
+}]
+
+
+
 for(var i=0; i<questionList.length; i++)
 {
   var question = questionList[i].question;
   var answer = questionList[i].answer;
   play(question,answer);
 }
+function printScoreCard(highScore)
+{
+  for(var i=0; i<highScore.length; i++)
+  {
+    console.log(chalk.bold.yellow(highScore[i].name+":"+ highScore[i].scoreH));
+  }
+}
+
 
 function play(question,answer){
   var userAnswer = readlineSync.question(question);
@@ -45,4 +66,26 @@ function play(question,answer){
   }
 }
 
-console.log("Congrats🔥, Your total score is: "+ chalk.bold.yellow(score));
+console.log(chalk.bold.yellow("\n*****Check out the ScoreCard*****"));
+printScoreCard(highScore);
+
+var newHighScore= false;
+
+for(var i=0; i<highScore.length; i++)
+{
+  if(score>=highScore[i].scoreH)
+  {
+    highScore.splice(i,1,{name:`${userName}`, scoreH:`${score}`});
+    newHighScore=true;
+    break;
+  }
+}
+
+if(newHighScore)
+{
+  console.log(chalk.bold.green("\nYou have beaten the high score,kindly send me a screenshot"));
+  console.log(chalk.bold.yellow("\n***LeaderBoard***"));
+  printScoreCard(highScore);
+}
+
+console.log("\nCongrats🔥, Your total score is: "+ chalk.bold.yellow(score));
